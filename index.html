@@ -55,6 +55,10 @@
 
       .l_a {
         padding: 25px;
+        background-image: url(static/imgs/fancy_watermark.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position:center;
       }
 
       .img_contaner {
@@ -115,7 +119,7 @@
           )
           view_val -= 1;
 
-          if (view_val < 0) {
+          if (view_val <= 0) {
             let vid_controls = $("#vid_controller");
             $("#lambo_vid").show();
             $(".main_stuff").hide();
