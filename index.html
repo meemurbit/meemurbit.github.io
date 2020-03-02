@@ -1,0 +1,129 @@
+<html>
+  <head>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+      .main_stuff {
+        text-align: center;
+        align-items: center;
+        padding-top: 150px;
+        background-image: url(static/imgs/tl_backer.jpeg);
+        background-size: auto;
+        height: 100%;
+        width: 100%;
+      }
+
+      #lambo_vid{
+        display: none;
+        z-index: 1000;
+      }
+
+      #vid_controller {
+        height: 100%;
+        width: 100%
+      }
+
+      section {
+        z-index: 999;
+      }
+
+
+
+      .slow_zoom {
+        height: 140px;
+        width: 140px;
+        transition: transform 1500s;
+      }
+
+      .slow_zoom:hover {
+        transform: scale(1000);
+
+      }
+
+      .l_a {
+        padding: 25px;
+      }
+
+      .img_contaner {
+        padding: 10px;
+        background-color: blue;
+        border-radius: 100;
+      }
+
+      video {
+        object-fit: fill;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="lambo_vid">
+      <video id="vid_controller" width="100%" height="100%" autoplay fullscreen>
+        <source src="static/videos/LAMBO.mp4" type="video/mp4">
+      </video>
+    </div>
+
+
+   <div class="main_stuff">
+   <div class="container">
+    <div class="l_a card">
+     <div class="img_container">
+       <img src="static/imgs/lopezer.png" class="slow_zoom">
+     </div>
+     <h1> Lopez Alarm </h1>
+    <section id="lopez_timer">
+      <input id="seconds_timer" type="number" min="1" placeholder="Seconds"></input>
+      <button id="setup_timer" class="btn btn-success">Set</button>
+    </section>
+  </div>
+   </div>
+ </div>
+
+
+  </body>
+
+  <script>
+
+    function setTimerListener() {
+      $("#setup_timer").on("click", ()=>{
+        let timer_val = $("#seconds_timer").val() || 1;
+        let view_val = timer_val;
+
+        let interval = setInterval(()=>{
+          $("#lopez_timer").html(
+            `
+            <div id="counter">
+              <h1>
+              ${view_val}
+              </h1>
+            </div>
+            `
+          )
+          view_val -= 1;
+
+          if (view_val < 1) {
+            let vid_controls = $("#vid_controller");
+            $("#lambo_vid").show();
+            $(".main_stuff").hide();
+            vid_controller.play();
+            clearInterval(interval);
+          }
+        }, 1000)
+      });
+    }
+
+    $(document).ready(()=>{
+      setTimerListener();
+    })
+  </script>
+
+</html>
